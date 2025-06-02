@@ -20,10 +20,12 @@ p {
 
 a {
   color: #007BFF;  
-  text-decoration: none;  
+  text-decoration: none; 
+  text-align: center; 
 }
 
 a:hover {
   color: #0056b3;  
   text-decoration: underline;
+  text-align: left;
 }
