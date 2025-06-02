@@ -20,9 +20,9 @@ window.onload = function() {
 
   // Exemple 2 : Image aléatoire (optionnel)
   let images = [
-    "image1.jpg",
-    "image2.jpg",
-    "image3.jpg"
+    "image1.png",
+    "image2.png",
+    "image3.png"
   ];
   let randomImage = images[Math.floor(Math.random() * images.length)];
   let imgElement = document.createElement("img");
