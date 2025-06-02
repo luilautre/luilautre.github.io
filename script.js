@@ -1,3 +1,5 @@
 window.onload = function() {
-  alert("Bienvenue sur mon site !");
+  while(true){
+    alert("Bienvenue sur mon site !");
+  }
 };
