@@ -1,31 +1,40 @@
+/* Style général du body */
 body {
   font-family: Arial, sans-serif;
   background-color: #f9f9f9;
   margin: 0;
-  padding: 0;
+  padding: 20px;
+  text-align: center;
 }
 
+/* Style pour le titre */
 h1 {
-  text-align: center;
-  color: #FF5733;
-  text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+  color: #007BFF;
+  margin-bottom: 20px;
 }
 
-}
-
+/* Style pour le paragraphe généré */
 p {
-  color: #666;
-  text-align: center;
+  font-size: 24px;
+  color: #333;
+  background-color: #e6f2ff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  display: inline-block;
+  margin-top: 20px;
 }
 
-a {
-  color: #007BFF;  
-  text-decoration: none; 
-  text-align: center; 
+/* Style pour l'image aléatoire */
+img {
+  max-width: 300px;
+  height: auto;
+  border-radius: 10px;
+  margin-top: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
 }
 
-a:hover {
-  color: #0056b3;  
-  text-decoration: underline;
-  text-align: left;
+/* Effet au survol sur l'image */
+img:hover {
+  transform: scale(1.05);
 }
