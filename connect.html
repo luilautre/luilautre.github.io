@@ -7,6 +7,7 @@
 </div>
 
 <script>
+(async () => {
   const auth0 = await createAuth0Client({
     domain: "luilautre.eu.auth0.com",
     clientId: "WUrGporjmFSfLBr3va3Bl0LJNuIR1O0Q",
@@ -40,8 +41,9 @@
   window.onload = async () => {
     if (window.location.search.includes("code=") && window.location.search.includes("state=")) {
       await auth0.handleRedirectCallback();
-      window.history.replaceState({}, document.title, "/");
+      window.history.replaceState({}, document.title, "/connect.html");
     }
     updateUI();
   };
+})();
 </script>
