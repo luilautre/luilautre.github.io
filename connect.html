@@ -4,43 +4,82 @@
   <meta charset="UTF-8">
   <title>Connexion Auth0</title>
   <script src="https://cdn.auth0.com/js/auth0-spa-js/1.5/auth0-spa-js.production.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background: #0066ff;
+      color: #fff;
+    }
+    button:hover {
+      background: #0044aa;
+    }
+    #profile {
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
+  <h1>Connexion avec Auth0</h1>
   <button id="login">Connexion</button>
   <button id="logout" style="display:none;">Déconnexion</button>
+
   <div id="profile" style="display:none;">
     <h2>Bienvenue <span id="username"></span></h2>
+    <pre id="userinfo"></pre>
   </div>
+
   <script>
   (async () => {
+    // Création du client Auth0
     const auth0 = await createAuth0Client({
       domain: "luilautre.eu.auth0.com",
       client_id: "WUrGporjmFSfLBr3va3Bl0LJNuIR1O0Q",
-      cacheLocation: "localstorage"
+      cacheLocation: "localstorage",
+      authorizationParams: {
+        redirect_uri: "https://luilautre.github.io/connect.html"
+      }
     });
 
+    // Met à jour l'affichage en fonction de l'état de connexion
     async function updateUI() {
       const isAuthenticated = await auth0.isAuthenticated();
+
       document.getElementById('login').style.display = isAuthenticated ? 'none' : 'inline-block';
       document.getElementById('logout').style.display = isAuthenticated ? 'inline-block' : 'none';
       document.getElementById('profile').style.display = isAuthenticated ? 'block' : 'none';
+
       if (isAuthenticated) {
         const user = await auth0.getUser();
         document.getElementById('username').textContent = user.name || user.email;
+        document.getElementById('userinfo').textContent = JSON.stringify(user, null, 2);
       }
     }
 
+    // Bouton Connexion
     document.getElementById('login').addEventListener('click', () => {
       auth0.loginWithRedirect();
     });
 
+    // Bouton Déconnexion
     document.getElementById('logout').addEventListener('click', () => {
-      auth0.logout({ returnTo: window.location.origin });
+      auth0.logout({ returnTo: "https://luilautre.github.io/" });
     });
 
+    // Gestion du callback OAuth après redirection
     window.onload = async () => {
       if (window.location.search.includes("code=") && window.location.search.includes("state=")) {
         await auth0.handleRedirectCallback();
+        // Nettoyer l’URL
         window.history.replaceState({}, document.title, "/connect.html");
       }
       updateUI();
