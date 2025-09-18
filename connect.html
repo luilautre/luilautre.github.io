@@ -80,7 +80,7 @@
       if (window.location.search.includes("code=") && window.location.search.includes("state=")) {
         await auth0.handleRedirectCallback();
         // Nettoyer l’URL
-        window.history.replaceState({}, document.title, "/connect.html");
+        window.history.replaceState({}, document.title, "https://luilautre.github.io/connect.html");
       }
       updateUI();
     };
