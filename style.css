@@ -81,3 +81,8 @@ img {
   top: 0;
   z-index: 1000;
 }
+
+[data-theme="dark"] #site-header {
+  background-color: #1e1e1e;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+}
