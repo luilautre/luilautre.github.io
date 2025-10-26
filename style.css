@@ -72,3 +72,12 @@ img {
         background: var(--title-color);
         color: var(--bg-color);
     }
+
+#site-header {
+  background-color: var(--para-bg-color); /* couleur douce en lien avec ton thème */
+  padding: 10px 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* légère ombre */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
