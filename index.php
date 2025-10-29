@@ -34,9 +34,8 @@
     <p>par : Achille Boulanger</p>
     <script src="script.js"><a href="/comments.html">bug</a></script>
     <?php
-  echo "<h1>Bienvenue sur mon site !</h1>";
-  echo "<p>Aujourd'hui, nous sommes le " . date("d/m/Y") . ".</p>";
-?>
+      echo "<p>Aujourd'hui, nous sommes le " . date("d/m/Y") . ".</p>";
+    ?>
 
 </body>
 </html>
