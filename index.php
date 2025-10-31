@@ -36,11 +36,11 @@
     <?php
       $heure = date("H");
       if ($heure < 16) {
-        echo "<p>Bonjour !</p>";
+        echo "<p>Bonjour,";
       } else {
-        echo "<p>Bonsoir !</p>";
+        echo "<p>Bonsoir,";
       }
-      echo "<p>Aujourd'hui, nous sommes le " . date("d/m/Y") . ".</p>";
+      echo "Aujourd'hui, nous sommes le " . date("d/m/Y") . ".</p>";
     ?>
 
 </body>
