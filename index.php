@@ -42,6 +42,35 @@
       }
       echo "aujourd'hui, nous sommes le " . date("d/m/Y") . ".</p>";
     ?>
+<?php
+// Liste d'événements
+$events = [
+    ["date" => "2025-10-31", "title" => "Halloween 🎃"],
+    ["date" => "2025-11-01", "title" => "Toussaint 🕯️"],
+    ["date" => "2025-12-25", "title" => "Noël 🎄"],
+    ["date" => "2026-01-01", "title" => "Nouvel an 🎆"]
+];
+
+// Date du jour
+$today = date("Y-m-d");
+
+// On garde seulement les événements à venir
+$upcoming = array_filter($events, fn($e) => $e["date"] >= $today);
+
+// Tri par date
+usort($upcoming, fn($a, $b) => strcmp($a["date"], $b["date"]));
+?>
+
+<section>
+  <h2>Évènements à venir</h2>
+  <ul>
+    <?php foreach ($upcoming as $event): ?>
+      <li>
+        <?= htmlspecialchars($event["date"]) ?> — <?= htmlspecialchars($event["title"]) ?>
+      </li>
+    <?php endforeach; ?>
+  </ul>
+</section>
 
 </body>
 </html>
