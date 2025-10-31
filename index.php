@@ -31,17 +31,16 @@
         <a href="/scratch-site"><p>luilautre_code</p></a>
     </div>
     <button id="theme-toggle" aria-label="Changer de thème">🌙</button>
-    <p>par : Achille Boulanger</p>
+    <p>par : Achille Boulanger</p><br>
     <script src="script.js"><a href="/comments.html">bug</a></script>
     <?php
       $heure = date("H");
       if ($heure < 16) {
         echo "<p>Bonjour !</p>";
-    } else {
+      } else {
         echo "<p>Bonsoir !</p>";
+      }
       echo "<p>Aujourd'hui, nous sommes le " . date("d/m/Y") . ".</p>";
-
-  }
     ?>
 
 </body>
