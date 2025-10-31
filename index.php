@@ -66,7 +66,7 @@ foreach ($events as $event) {
 <section>
   <h2>Événement du jour</h2>
   <?php if ($currentEvent): ?>
-    <p><?= htmlspecialchars($currentEvent["date"]) ?> — <?= htmlspecialchars($currentEvent["title"]) ?></p>
+    <p><?= htmlspecialchars($currentEvent["title"]) ?></p>
   <?php else: ?>
     <p>Aucun événement prévu aujourd’hui.</p>
   <?php endif; ?>
