@@ -13,30 +13,26 @@
   <title>luilautre | messagerie gratuite et plusieurs jeux</title>
   <meta name="description" content="Bienvenue chez luilautre vous retrouverez des jeux-vidéos comme dessine ton jeu une messagerie gratuite et bien d'autres"/>
   <meta name="keywords" content="jeux-vidéos, dessine ton jeu, messagerie gratuite" />
-  <meta name="google-site-verification" content="a4bNKJnqP5jE35HIOj76BRI37Bf-ibiU4Ek9nKkpwsk" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="favicon.png" type="image/x-icon">
 
 <?php
-// Liste d'événements (au format mois-jour)
+// Liste d'événements (mois-jour)
 $events = [
-    ["date" => "10-31", "title" => "Halloween 🎃", "background" => "/halloween.png"],
-    ["date" => "11-01", "title" => "Toussaint 🕯️", "background" => "/toussaint.png"],
-    ["date" => "12-25", "title" => "Noël 🎄", "background" => "/noel.png"],
-    ["date" => "01-01", "title" => "Nouvel an 🎆", "background" => "/nAn.png"]
+    ["date" => "10-31", "title" => "Halloween 🎃", "class" => "halloween-bg"],
+    ["date" => "12-25", "title" => "Noël 🎄", "class" => "noel-bg"],
+    ["date" => "01-01", "title" => "Nouvel an 🎆", "class" => "nouvelan-bg"]
 ];
 
 $today = date("m-d");
-
-// Fond par défaut
-$background = "/blank.png";
+$bgClass = 'default-bg';
 $currentEvent = null;
 
 // Recherche de l’événement du jour
 foreach ($events as $event) {
     if ($event["date"] === $today) {
-        $background = $event["background"];
+        $bgClass = $event["class"];
         $currentEvent = $event;
         break;
     }
@@ -44,15 +40,25 @@ foreach ($events as $event) {
 ?>
 
 <style>
+/* Fonds des événements */
+body.default-bg { background: url('/blank.jpg') no-repeat center center fixed; background-size: cover; }
+body.halloween-bg { background: url('/halloween.jpg') no-repeat center center fixed; background-size: cover; }
+body.noel-bg { background: url('/noel.jpg') no-repeat center center fixed; background-size: cover; }
+body.nouvelan-bg { background: url('/nAn.jpg') no-repeat center center fixed; background-size: cover; }
+
 body {
-  background: url('<?= htmlspecialchars($background) ?>') no-repeat center center fixed;
-  background-size: cover;
-  transition: background 0.6s ease-in-out;
+  transition: background 0.6s ease-in-out, filter 0.6s ease-in-out;
+}
+
+/* Mode sombre */
+body.dark {
+  filter: brightness(0.5);
 }
 </style>
 
 </head>
-<body>
+<body class="<?= $bgClass ?>">
+
   <h1>Bienvenue chez luilautre !</h1>
 
   <div id="buttons">
@@ -65,7 +71,13 @@ body {
   <button id="theme-toggle" aria-label="Changer de thème">🌙</button>
   <p>par : Achille Boulanger</p><br>
 
-  <script src="script.js"></script>
+  <script>
+    // Toggle mode sombre
+    const btn = document.getElementById('theme-toggle');
+    btn.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+    });
+  </script>
 
   <?php
     $heure = date("H");
