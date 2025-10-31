@@ -34,14 +34,13 @@
     <p>par : Achille Boulanger</p>
     <script src="script.js"><a href="/comments.html">bug</a></script>
     <?php
-      echo "<p>Aujourd'hui, nous sommes le " . date("d/m/Y") . ".</p>";
       $heure = date("H");
-      if ($heure < 12) {
+      if ($heure < 16) {
         echo "<p>Bonjour !</p>";
-    } elseif ($heure < 18) {
-        echo "<p>Bon après-midi !</p>";
     } else {
         echo "<p>Bonsoir !</p>";
+      echo "<p>Aujourd'hui, nous sommes le " . date("d/m/Y") . ".</p>";
+
   }
     ?>
 
