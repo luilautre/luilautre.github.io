@@ -40,7 +40,7 @@
       } else {
         echo "<p>Bonsoir, ";
       }
-      echo "Aujourd'hui, nous sommes le " . date("d/m/Y") . ".</p>";
+      echo "aujourd'hui, nous sommes le " . date("d/m/Y") . ".</p>";
     ?>
 
 </body>
