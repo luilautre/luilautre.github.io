@@ -51,25 +51,25 @@ $events = [
     ["date" => "2026-01-01", "title" => "Nouvel an 🎆"]
 ];
 
-// Date du jour
 $today = date("Y-m-d");
 
-// On garde seulement les événements à venir
-$upcoming = array_filter($events, fn($e) => $e["date"] >= $today);
-
-// Tri par date
-usort($upcoming, fn($a, $b) => strcmp($a["date"], $b["date"]));
+// On cherche l’événement du jour
+$currentEvent = null;
+foreach ($events as $event) {
+    if ($event["date"] === $today) {
+        $currentEvent = $event;
+        break;
+    }
+}
 ?>
 
 <section>
-  <h2>Évènements à venir</h2>
-  <ul>
-    <?php foreach ($upcoming as $event): ?>
-      <li>
-        <?= htmlspecialchars($event["date"]) ?> — <?= htmlspecialchars($event["title"]) ?>
-      </li>
-    <?php endforeach; ?>
-  </ul>
+  <h2>Événement du jour</h2>
+  <?php if ($currentEvent): ?>
+    <p><?= htmlspecialchars($currentEvent["date"]) ?> — <?= htmlspecialchars($currentEvent["title"]) ?></p>
+  <?php else: ?>
+    <p>Aucun événement prévu aujourd’hui.</p>
+  <?php endif; ?>
 </section>
 
 </body>
