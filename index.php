@@ -10,7 +10,7 @@
   <noscript><img src="https://app.ardalio.com/7/18/2195503.png"></noscript>
 
   <meta charset="utf-8">
-  <title>luilautre | messagerie gratuite et plusieurs jeux</title>
+  <title>luilautre | plusieurs jeux</title>
   <meta name="description" content="Bienvenue chez luilautre vous retrouverez des jeux-vidéos comme dessine ton jeu une messagerie gratuite et bien d'autres"/>
   <meta name="keywords" content="jeux-vidéos, dessine ton jeu, messagerie gratuite" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,9 +20,9 @@
 <?php
 // Liste d'événements (mois-jour)
 $events = [
-    ["date" => "10-31", "title" => "Halloween 🎃", "class" => "halloween-bg"],
-    ["date" => "12-25", "title" => "Noël 🎄", "class" => "noel-bg"],
-    ["date" => "01-01", "title" => "Nouvel an 🎆", "class" => "nouvelan-bg"]
+    ["date" => "10-31", "title" => "Joyeux halloween 🎃", "class" => "halloween-bg"],
+    ["date" => "12-25", "title" => "Joyeux noël 🎄", "class" => "noel-bg"],
+    ["date" => "01-01", "title" => "Joyeux nouvel an 🎆", "class" => "nouvelan-bg"]
 ];
 
 $today = date("m-d");
@@ -90,11 +90,8 @@ body.dark {
   ?>
 
   <section>
-    <h2>Événement du jour</h2>
     <?php if ($currentEvent): ?>
       <p><?= htmlspecialchars($currentEvent["title"]) ?></p>
-    <?php else: ?>
-      <p>Aucun événement prévu aujourd’hui.</p>
     <?php endif; ?>
   </section>
 
