@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+// #buttons <- div principale (ctrl+f, <div id="buttons">)
+?>
 <html lang="fr">
 <head>
   <span id="wts2195503"></span>
@@ -63,9 +66,10 @@ body.dark {
 
   <div id="buttons">
       <a href="/message.html"><p>messages</p></a>
-      <a href="/share"><p>fichiers</p></a>
-      <a href="/games"><p>Jeux</p></a>
-      <a href="/scratch-site"><p>luilautre_code</p></a>
+      <a href="https://luilautre.github.io/share"><p>fichiers</p></a>
+      <a href="https://luilautre.github.io/games"><p>Jeux</p></a>
+      <a href="https://luilautre.github.io/scratch-site"><p>luilautre_code</p></a>
+      <a href="https://juke-app-mh0q.onrender.com/"><p>luilautre_code</p></a>
   </div>
 
   <button id="theme-toggle" aria-label="Changer de thème">🌙</button>
