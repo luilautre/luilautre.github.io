@@ -69,7 +69,7 @@ body.dark {
       <a href="https://luilautre.github.io/share"><p>fichiers</p></a>
       <a href="https://luilautre.github.io/games"><p>Jeux</p></a>
       <a href="https://luilautre.github.io/scratch-site"><p>luilautre_code</p></a>
-      <a href="https://juke-app-mh0q.onrender.com/"><p>luilautre_code</p></a>
+      <a href="https://juke-app-mh0q.onrender.com/"><p>Juke app</p></a>
   </div>
 
   <button id="theme-toggle" aria-label="Changer de thème">🌙</button>
