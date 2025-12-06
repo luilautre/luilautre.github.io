@@ -4,12 +4,13 @@
 ?>
 <html lang="fr">
 <head>
-  <span id="wts2195503"></span>
-  <script>
-    var wts=document.createElement('script');wts.async=true;
+  <!-- begin code v 7.0 -->
+    <span id="wts2205337"></span>
+    <script>var wts=document.createElement('script');wts.async=true;
     wts.src='https://app.ardalio.com/wts7.js';document.head.appendChild(wts);
-    wts.onload = function(){ wtsl7(2195503,18); };
-  </script>
+    wts.onload = function(){ wtsl7(2205337,1); };
+    </script><noscript>Erreur : "veuillez activer le javasript dans les paramètres de votre navigateur"</noscript>
+  <!-- end code v 7.0 -->
   <noscript><img src="https://app.ardalio.com/7/18/2195503.png"></noscript>
 
   <meta charset="utf-8">
