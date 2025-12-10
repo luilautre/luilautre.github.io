@@ -62,8 +62,7 @@ body.dark {
 
 </head>
 <body class="<?= $bgClass ?>">
-
-  <h1>Bienvenue chez luilautre !</h1>
+  <h1>Bienvenue chez <a href="#monnom" id="llnom" title="Achille">luilautre !</a></h1>
 
   <div id="buttons">
       <a href="/message.html"><p>messages</p></a>
@@ -86,6 +85,7 @@ body.dark {
   </script>
 
   <?php
+    // [Bonjour / Bonsoir] on est le [date].
     $heure = date("H");
     if ($heure < 16) {
       echo "<p>Bonjour, ";
