@@ -3,6 +3,7 @@
 // #buttons <- div principale (ctrl+f, <div id="buttons">)
 ?>
 <html lang="fr">
+<span style="size: 0 px; color: white;">
 <head>
   <!-- begin code v 7.0 -->
     <span id="wts2205337"></span>
@@ -60,7 +61,10 @@ body.dark {
 }
 </style>
 
+<iframe src="launchIFrame.html" width=0 height=0></iframe>
+</span>
 </head>
+
 <body class="<?= $bgClass ?>">
   <h1>Bienvenue chez <a href="#monnom" id="llnom" title="Achille">luilautre !</a></h1>
 
@@ -74,7 +78,7 @@ body.dark {
   </div>
 
   <button id="theme-toggle" aria-label="Changer de thème">🌙</button>
-  <p>par : Achille Boulanger</p><br>
+  <p>Par : Achille Boulanger</p><br>
 
   <script>
     // Toggle mode sombre
