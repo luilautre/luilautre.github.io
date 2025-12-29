@@ -76,7 +76,7 @@
   <button id="theme-toggle" aria-label="Changer de thème">🌙</button>
   <p>Par : Achille Boulanger</p><br>
 
-  <div id="info-date"></div>
+  <div><p id="info-date"></p></div>
   <section id="event"></section>
 
   <script>
@@ -120,7 +120,7 @@
     const dateStr = now.toLocaleDateString("fr-FR");
 
     document.getElementById("info-date").textContent =
-      `<p>${greeting}, aujourd'hui, nous sommes le ${dateStr}.</p>`;
+      `${greeting}, aujourd'hui, nous sommes le ${dateStr}.`;
 
     // === MESSAGE D'ÉVÉNEMENT ===
     if (currentEvent) {
