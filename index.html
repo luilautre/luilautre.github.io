@@ -125,6 +125,13 @@
     if (currentEvent) {
       document.getElementById("event").textContent = currentEvent.title;
     }
+    // === UTMs ===
+    const params = new URLSearchParams(window.location.search);
+      ["utm_source","utm_medium","utm_campaign"].forEach(key => {
+      const val = params.get(key);
+      if (val) localStorage.setItem(key, val);
+    });
+
   </script>
 
 </body>
