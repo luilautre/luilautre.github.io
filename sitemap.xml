@@ -4,39 +4,21 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
-
 <url>
   <loc>https://luilautre.github.io/</loc>
-  <lastmod>2025-08-29T07:57:33+00:00</lastmod>
+  <changefreq>weekly</changefreq><!-- frequs : always(tout le temps) hourly(toutes les heures)
+     daily(tous les jours) weekly(toutes les semaines) monthly(tous les mois) yearly(tous les ans) never(jamais) -->
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://luilautre.github.io/Bar_a_momes/</loc>
-  <lastmod>2025-06-11T06:53:31+00:00</lastmod>
+  <loc>https://luilautre.github.io/games</loc>
+  <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://luilautre.github.io/js/</loc>
-  <lastmod>2025-07-01T11:47:49+00:00</lastmod>
+  <loc>https://luilautre.github.io/libs/</loc>
+  <changefreq>weekly</changefreq>
   <priority>0.80</priority>
 </url>
-<url>
-  <loc>https://luilautre.github.io/basile/</loc>
-  <lastmod>2025-06-24T12:34:38+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://luilautre.github.io/games/</loc>
-  <lastmod>2025-08-29T08:56:38+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://luilautre.github.io/message.html</loc>
-  <lastmod>2025-08-29T07:57:33+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-
 
 </urlset>

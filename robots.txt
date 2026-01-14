@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+User-agent: *
+Allow: /games
+User-agent: *
+Allow: /libs
+Sitemap: https://luilautre.github.io/sitemap.xml
