@@ -94,7 +94,7 @@
     const events = [
       { date: "10-31", title: "Joyeux halloween 🎃!", class: "halloween-bg" },
       { date: "12-25", title: "Joyeux noël 🎄!", class: "noel-bg" },
-      { date: "01-01", title: "Joyeux nouvel an 🎆!", class: "nouvelan-bg" }
+      { date: "01-01", title: "Bonne année 🎆!", class: "nouvelan-bg" }
     ];
 
     const now = new Date();
@@ -128,7 +128,7 @@
 
     // === MESSAGE D'ÉVÉNEMENT ===
     if (currentEvent) {
-      document.getElementById("event").textContent = currentEvent.title;
+      document.getElementById("event").innerhtml = "<p>"+currentEvent.title+"</p>";
     }
     // === UTMs ===
     const params = new URLSearchParams(window.location.search);
