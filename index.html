@@ -51,6 +51,12 @@
       transition: background 0.6s ease-in-out, filter 0.6s ease-in-out;
     }
 
+    #llfriends {
+      background: var(--para-bg-color);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+
     /* Mode sombre */
     body.dark {
       filter: brightness(0.5);
@@ -81,7 +87,8 @@
   
   <div><p id="info-date"></p></div>
   <section id="event"></section>
-  <iframe src="/links.html" style="width:100%; max-width:100%; border:none;" onload="this.style.height = this.contentWindow.document.body.scrollHeight + 'px'"></iframe>
+  <section id="llfriends"></section>
+  <!--<iframe src="/links.html" style="width:100%; max-width:100%; border:none;" onload="this.style.height = this.contentWindow.document.body.scrollHeight + 'px'"></iframe>-->
 
   <script>
     // === MODE SOMBRE ===
