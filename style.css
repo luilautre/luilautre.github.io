@@ -126,9 +126,3 @@ img {
 #games-menu a p:hover {
   background-color: #005ecc;
 }
-
-.si {
-  width: 32px;
-  height: 32px;
-  /* filtre pour la couleur si besoin */
-}
