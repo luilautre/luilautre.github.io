@@ -149,6 +149,7 @@
     container.getAttribute("data-icons").split(",").forEach(slug => {
       const img = document.createElement("img");
       img.className = "si";
+      img.alt = "logo de "+slug.trim();
       img.src = base + slug.trim() + ".svg";
       img.draggable = false;
       container.appendChild(img);
