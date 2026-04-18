@@ -127,49 +127,33 @@
   <br>
   <section id="llfriends">
     <span class="card">
-      <img src="/img/luilautre.png">
-      <p>luilautre</p>
-<div class="si-group"><!-- 🖥️ Matériel -->
-<img class="si" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/arduino.svg">
-<img class="si" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/raspberrypi.svg">
+  <img src="/img/luilautre.png">
+  <p>luilautre</p>
+  <div class="si-group" data-icons="arduino,raspberrypi,linux,ubuntu,python,cplusplus,javascript,html5,css,micropython,scratch,php,lua,gnubash,sublimetext,git,github,nodedotjs,npm,githubpages,markdown"></div>
+  <a href="https://github.com/luilautre"><img src="https://shields.io/badge/GitHub-black?logo=github" style="width: 100px;" /></a>
+</span>
 
-<!-- 💻 Systèmes -->
-<img class="si" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/linux.svg">
-<img class="si" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/ubuntu.svg">
-
-<!-- 🧑‍💻 Langages -->
-<img class="si" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/python.svg">
-<img class="si" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/cplusplus.svg">
-<img class="si" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/javascript.svg">
-<img class="si" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/html5.svg">
-<img class="si" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/css.svg"><!-- 3 ne marche pas -->
-<img class="si" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/micropython.svg">
-<img class="si" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/scratch.svg">
-<!--<img class="si" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/java.svg"> ne marche pas -->
-<img class="si" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/php.svg">
-<img class="si" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/lua.svg">
-<img class="si" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/gnubash.svg">
-
-<!-- 🛠️ Outils & Éditeurs -->
-<img class="si" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/sublimetext.svg">
-<img class="si" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/git.svg">
-<img class="si" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/github.svg">
-<img class="si" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/nodedotjs.svg">
-<img class="si" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/npm.svg">
-
-<img class="si" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/githubpages.svg">
-<img class="si" src="https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/markdown.svg">
-</div>
-      <a href="https://github.com/luilautre"><img src="https://shields.io/badge/GitHub-black?logo=github" style="width: 100px;" /></a>
-      <a href="https://patreon.com/luilautre"><img src="https://img.shields.io/badge/Patreon-black?logo=patreon" /></a>
-    </span>
-    <span class="card">
-      <img src="/img/Sectral.png">
-      Spectral
-      <a href="https://github.com/spectralioneuf"><img src="https://shields.io/badge/GitHub-black?logo=github" style="width: 100px;" /></a>
-    </span>
+<span class="card">
+  <img src="/img/Sectral.png">
+  <p>Spectral</p>
+  <div class="si-group" data-icons="python,javascript"></div>
+  <a href="https://github.com/spectralioneuf"><img src="https://shields.io/badge/GitHub-black?logo=github" style="width: 100px;" /></a>
+</span>
   </section>
   <!--<iframe src="/links.html" style="width:100%; max-width:100%; border:none;" onload="this.style.height = this.contentWindow.document.body.scrollHeight + 'px'"></iframe>-->
+
+  <script>
+  const base = "https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/";
+  document.querySelectorAll(".si-group[data-icons]").forEach(container => {
+    container.getAttribute("data-icons").split(",").forEach(slug => {
+      const img = document.createElement("img");
+      img.className = "si";
+      img.src = base + slug.trim() + ".svg";
+      img.draggable = false;
+      container.appendChild(img);
+    });
+  });
+  </script>
 
   <script>
     /*/ === MODE SOMBRE ===
