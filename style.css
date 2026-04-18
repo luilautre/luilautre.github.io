@@ -44,6 +44,7 @@ p {
     border-radius: 8px;
     display: inline-block;
     margin-top: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
 img {
