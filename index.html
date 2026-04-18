@@ -72,11 +72,25 @@
       height: auto;
     }
 
-    .card img.si{
+    .si-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 4px;
+      margin-bottom: 6px;
+    }
+
+    .card img.si {
       width: 24px;
       height: auto;
       display: inline-block;
-      margin: 0;
+      margin: 0 !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+    }
+
+    .card img.si:hover {
+      transform: none;
     }
 
     /* Mode sombre
