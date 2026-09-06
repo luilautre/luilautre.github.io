@@ -169,7 +169,7 @@
         return 'Inconnu';
     };
 
-    const detectAdBlockers = () => {
+    const detectAdBlockers = async () => {
         const blockers = {
             uBlockOrigin: false,
             adBlock: false,
@@ -178,58 +178,109 @@
             ghostery: false,
             privacyBadger: false,
             adBlockPlus: false,
+            duckDuckGoPrivacy: false,
+            uBlockDNS: false, // Impossible à détecter directement (DNS)
             unknown: false
         };
 
-        // Méthode 1 : Éléments cachés
+        // Méthode 1 : Vérifier les propriétés globales (ancienne méthode)
+        if (typeof window.__adblock !== 'undefined') blockers.adBlock = true;
+        if (typeof window.__adblockplus !== 'undefined') blockers.adBlockPlus = true;
+        if (typeof window.__uBlock !== 'undefined') blockers.uBlockOrigin = true;
+        if (typeof window.__adguard !== 'undefined') blockers.adGuard = true;
+        if (typeof window.__braveShield !== 'undefined') blockers.braveShield = true;
+        if (typeof window.__ghostery !== 'undefined') blockers.ghostery = true;
+        if (typeof window.__privacyBadger !== 'undefined') blockers.privacyBadger = true;
+        if (typeof window.__ddgPrivacy !== 'undefined') blockers.duckDuckGoPrivacy = true;
+
+        // Méthode 2 : Éléments cachés (plusieurs sélecteurs)
+        const testSelectors = [
+            'adblock-test',
+            'pubads-test',
+            'ad-test',
+            'adblock',
+            'adsbygoogle',
+            'fb-pixel',
+            'google-analytics'
+        ];
+
         const testElement = document.createElement('div');
-        testElement.style.display = 'none';
-        testElement.id = 'adblock-test';
-        testElement.className = 'pubads pubads-test ad-test adblock-test';
+        testElement.style.position = 'absolute';
+        testElement.style.width = '1px';
+        testElement.style.height = '1px';
+        testElement.style.opacity = '0';
+        testElement.style.pointerEvents = 'none';
+        testElement.id = 'goodwidget-adblock-test';
+
+        // Ajouter tous les sélecteurs connus
+        testSelectors.forEach(selector => {
+            testElement.classList.add(selector);
+        });
+
         document.body.appendChild(testElement);
 
-        setTimeout(() => {
-            const isHidden = (elem) => {
-                return elem.offsetParent === null ||
-                       elem.style.display === 'none' ||
-                       elem.style.visibility === 'hidden' ||
-                       elem.offsetHeight === 0 ||
-                       elem.offsetWidth === 0;
-            };
+        // Vérifier après un délai (certains bloqueurs mettent du temps à agir)
+        await new Promise(resolve => setTimeout(resolve, 200));
 
-            if (isHidden(testElement)) {
-                blockers.unknown = true;
-            }
-            testElement.remove();
-        }, 100);
-
-        // Méthode 2 : Propriétés globales
-        if (typeof window.__adblock === 'boolean') blockers.adBlock = true;
-        if (typeof window.__adblockplus === 'boolean') blockers.adBlockPlus = true;
-        if (typeof window.__uBlock === 'boolean') blockers.uBlockOrigin = true;
-        if (typeof window.__adguard === 'boolean') blockers.adGuard = true;
-        if (typeof window.__braveShield === 'boolean') blockers.braveShield = true;
-        if (typeof window.__ghostery === 'boolean') blockers.ghostery = true;
-        if (typeof window.__privacyBadger === 'boolean') blockers.privacyBadger = true;
-
-        // Méthode 3 : Requête bloquée (simulation)
-        const testAdBlockScript = () => {
-            return new Promise((resolve) => {
-                const script = document.createElement('script');
-                script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
-                script.onload = () => resolve(false);
-                script.onerror = () => resolve(true);
-                document.head.appendChild(script);
-                setTimeout(() => {
-                    script.remove();
-                    resolve(false);
-                }, 2000);
-            });
+        const isHidden = (elem) => {
+            return elem.offsetParent === null ||
+                   elem.style.display === 'none' ||
+                   elem.style.visibility === 'hidden' ||
+                   elem.offsetHeight === 0 ||
+                   elem.offsetWidth === 0 ||
+                   window.getComputedStyle(elem).display === 'none';
         };
 
-        testAdBlockScript().then((isBlocked) => {
-            if (isBlocked) blockers.unknown = true;
-        });
+        if (isHidden(testElement)) {
+            blockers.unknown = true;
+        }
+
+        testElement.remove();
+
+        // Méthode 3 : Tester le chargement de scripts de pubs (promesses)
+        const testScripts = [
+            { url: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', name: 'googleAds' },
+            { url: 'https://connect.facebook.net/en_US/fbevents.js', name: 'facebookPixel' },
+            { url: 'https://www.google-analytics.com/analytics.js', name: 'googleAnalytics' }
+        ];
+
+        const scriptTests = testScripts.map(script =>
+            new Promise(resolve => {
+                const testScript = document.createElement('script');
+                testScript.src = script.url;
+                testScript.onload = () => resolve({ name: script.name, blocked: false });
+                testScript.onerror = () => resolve({ name: script.name, blocked: true });
+                document.head.appendChild(testScript);
+                setTimeout(() => {
+                    testScript.remove();
+                    resolve({ name: script.name, blocked: false });
+                }, 3000);
+            })
+        );
+
+        const results = await Promise.all(scriptTests);
+        const blockedScripts = results.filter(r => r.blocked).map(r => r.name);
+
+        // Si au moins un script est bloqué, on suppose qu'un bloqueur est actif
+        if (blockedScripts.length > 0) {
+            blockers.unknown = true;
+        }
+
+        /*// Méthode 4 : Détecter DuckDuckGo Privacy Essentials via des requêtes spécifiques
+        // (DuckDuckGo bloque certaines requêtes comme les trackers connus)
+        try {
+            const response = await fetch('https://tracker.example.com/test', {
+                method: 'HEAD',
+                mode: 'no-cors',
+                cache: 'no-store'
+            });
+            if (!response.ok) {
+                blockers.duckDuckGoPrivacy = true;
+            }
+        } catch (e) {
+            // Si la requête échoue (bloquée), on suppose que DuckDuckGo est actif
+            blockers.duckDuckGoPrivacy = true;
+        } */
 
         return blockers;
     };
