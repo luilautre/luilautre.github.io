@@ -48,8 +48,8 @@ p {
     box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
-a.alert p {
-    color: var(--alert-color)
+p.alert {
+    background-color: var(--alert-color)
 }
 
 img {
