@@ -3,6 +3,7 @@
     --text-color: #333;
     --title-color: #007BFF;
     --para-bg-color: #e6f2ff;
+    --alert-color: #ff0000;
 }
 
 #llnom {
@@ -45,6 +46,10 @@ p {
     display: inline-block;
     margin-top: 20px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+a.alert p {
+    color: var(--alert-color)
 }
 
 img {
