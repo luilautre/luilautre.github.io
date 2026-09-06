@@ -1,17 +1,17 @@
-// good.widget.js - Détection des paramètres de sécurité + widget visuel
+// good.widget.js - Détection des paramètres de sécurité + widget visuel avec emojis
 (function() {
     'use strict';
 
     // --- 1. Configuration du widget ---
     const WIDGET_CONFIG = {
-        position: 'bottom-right', // 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
-        autoShow: true,           // Afficher automatiquement ?
-        showDetailsOnHover: true, // Afficher les détails au survol ?
-        closeButton: true,        // Bouton pour fermer le widget ?
-        animation: true           // Animation d'apparition ?
+        position: 'bottom-right',
+        autoShow: true,
+        showDetailsOnHover: true,
+        closeButton: true,
+        animation: true
     };
 
-    // --- 2. Styles CSS pour le widget ---
+    // --- 2. Styles CSS pour le widget (corrigé) ---
     const injectStyles = () => {
         const style = document.createElement('style');
         style.textContent = `
@@ -20,19 +20,19 @@
                 z-index: 9999;
                 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
                 font-size: 14px;
-                line-height: 1.5; /* ✅ Augmenté pour un meilleur centrage */
+                line-height: 1.5;
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
                 border-radius: 8px;
-                padding: 10px 14px; /* ✅ Réduit légèrement pour éviter l'effet "trop large" */
+                padding: 10px 14px;
                 color: white;
                 cursor: default;
                 transition: all 0.3s ease;
-                max-width: 220px; /* ✅ Largeur maximale fixée */
-                min-height: 50px; /* ✅ Hauteur minimale pour éviter le compactage */
-                box-sizing: border-box; /* ✅ Inclut padding et border dans la largeur */
+                max-width: 220px;
+                min-height: 50px;
+                box-sizing: border-box;
                 display: flex;
                 flex-direction: column;
-                justify-content: center; /* ✅ Centrage vertical */
+                justify-content: center;
                 ${WIDGET_CONFIG.animation ? 'opacity: 0; transform: translateY(20px);' : ''}
             }
 
@@ -41,15 +41,15 @@
             }
 
             .goodwidget-container.score-high {
-                background: #28a745; /* Vert */
+                background: #28a745;
             }
 
             .goodwidget-container.score-medium {
-                background: #ffc107; /* Orange */
+                background: #ffc107;
             }
 
             .goodwidget-container.score-low {
-                background: #dc3545; /* Rouge */
+                background: #dc3545;
                 animation: pulse 1.5s infinite;
             }
 
@@ -62,23 +62,23 @@
             .goodwidget-header {
                 display: flex;
                 justify-content: space-between;
-                align-items: center; /* ✅ Centrage vertical pour l'en-tête */
+                align-items: center;
                 width: 100%;
-                margin: 0; /* ✅ Supprime les marges inutiles */
+                margin: 0;
             }
 
             .goodwidget-title {
                 font-weight: 600;
                 font-size: 15px;
                 margin: 0;
-                line-height: 1.5; /* ✅ Aligné avec le conteneur */
+                line-height: 1.5;
             }
 
             .goodwidget-score {
                 font-weight: 700;
                 font-size: 18px;
                 margin: 0;
-                line-height: 1.5; /* ✅ Aligné avec le conteneur */
+                line-height: 1.5;
             }
 
             .goodwidget-details {
@@ -90,7 +90,7 @@
                 width: 100%;
             }
 
-            .goodwidget-container:hover .goodwidget-details {
+            .goodwidget-container\:hover .goodwidget-details {
                 display: block;
             }
 
@@ -102,10 +102,10 @@
                 cursor: pointer;
                 padding: 0;
                 line-height: 1;
-                margin-left: 8px; /* ✅ Espacement entre le score et la croix */
+                margin-left: 8px;
             }
 
-            .goodwidget-close:hover {
+            .goodwidget-close\:hover {
                 opacity: 0.8;
             }
 
@@ -127,7 +127,7 @@
         document.head.appendChild(style);
     };
 
-    // --- 3. Détection du navigateur, OS, bloqueurs, etc. (inchangé) ---
+    // --- 3. Détection du navigateur, OS, bloqueurs, etc. ---
     const detectBrowser = () => {
         const userAgent = navigator.userAgent;
         let browser = 'Inconnu';
@@ -192,11 +192,10 @@
             privacyBadger: false,
             adBlockPlus: false,
             duckDuckGoPrivacy: false,
-            uBlockDNS: false, // Impossible à détecter directement (DNS)
             unknown: false
         };
 
-        // Méthode 1 : Vérifier les propriétés globales (ancienne méthode)
+        // Méthode 1 : Propriétés globales
         if (typeof window.__adblock !== 'undefined') blockers.adBlock = true;
         if (typeof window.__adblockplus !== 'undefined') blockers.adBlockPlus = true;
         if (typeof window.__uBlock !== 'undefined') blockers.uBlockOrigin = true;
@@ -206,17 +205,7 @@
         if (typeof window.__privacyBadger !== 'undefined') blockers.privacyBadger = true;
         if (typeof window.__ddgPrivacy !== 'undefined') blockers.duckDuckGoPrivacy = true;
 
-        // Méthode 2 : Éléments cachés (plusieurs sélecteurs)
-        const testSelectors = [
-            'adblock-test',
-            'pubads-test',
-            'ad-test',
-            'adblock',
-            'adsbygoogle',
-            'fb-pixel',
-            'google-analytics'
-        ];
-
+        // Méthode 2 : Éléments cachés
         const testElement = document.createElement('div');
         testElement.style.position = 'absolute';
         testElement.style.width = '1px';
@@ -224,15 +213,9 @@
         testElement.style.opacity = '0';
         testElement.style.pointerEvents = 'none';
         testElement.id = 'goodwidget-adblock-test';
-
-        // Ajouter tous les sélecteurs connus
-        testSelectors.forEach(selector => {
-            testElement.classList.add(selector);
-        });
-
+        testElement.classList.add('adblock-test', 'pubads-test', 'adsbygoogle', 'fb-pixel');
         document.body.appendChild(testElement);
 
-        // Vérifier après un délai (certains bloqueurs mettent du temps à agir)
         await new Promise(resolve => setTimeout(resolve, 200));
 
         const isHidden = (elem) => {
@@ -247,14 +230,12 @@
         if (isHidden(testElement)) {
             blockers.unknown = true;
         }
-
         testElement.remove();
 
-        // Méthode 3 : Tester le chargement de scripts de pubs (promesses)
+        // Méthode 3 : Tester le chargement de scripts de pubs
         const testScripts = [
             { url: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js', name: 'googleAds' },
-            { url: 'https://connect.facebook.net/en_US/fbevents.js', name: 'facebookPixel' },
-            { url: 'https://www.google-analytics.com/analytics.js', name: 'googleAnalytics' }
+            { url: 'https://connect.facebook.net/en_US/fbevents.js', name: 'facebookPixel' }
         ];
 
         const scriptTests = testScripts.map(script =>
@@ -272,28 +253,9 @@
         );
 
         const results = await Promise.all(scriptTests);
-        const blockedScripts = results.filter(r => r.blocked).map(r => r.name);
-
-        // Si au moins un script est bloqué, on suppose qu'un bloqueur est actif
-        if (blockedScripts.length > 0) {
+        if (results.some(r => r.blocked)) {
             blockers.unknown = true;
         }
-
-        /*// Méthode 4 : Détecter DuckDuckGo Privacy Essentials via des requêtes spécifiques
-        // (DuckDuckGo bloque certaines requêtes comme les trackers connus)
-        try {
-            const response = await fetch('https://tracker.example.com/test', {
-                method: 'HEAD',
-                mode: 'no-cors',
-                cache: 'no-store'
-            });
-            if (!response.ok) {
-                blockers.duckDuckGoPrivacy = true;
-            }
-        } catch (e) {
-            // Si la requête échoue (bloquée), on suppose que DuckDuckGo est actif
-            blockers.duckDuckGoPrivacy = true;
-        } */
 
         return blockers;
     };
@@ -354,46 +316,29 @@
         };
     };
 
-    // --- 4. Calcul du score de sécurité (corrigé) ---
+    // --- 4. Calcul du score de sécurité ---
     const calculateSecurityScore = (adBlockers, securitySettings) => {
-        let score = 50; // Score de base neutre
+        let score = 50;
 
-        // Bonus pour les bloqueurs de pubs
-        if (adBlockers.uBlockOrigin || adBlockers.adBlock || adBlockers.adGuard || adBlockers.unknown) {
+        const activeBlockers = Object.entries(adBlockers)
+            .filter(([_, detected]) => detected)
+            .map(([name]) => name);
+
+        if (activeBlockers.length > 0) {
             score += 10;
+            if (activeBlockers.includes('uBlockOrigin')) score += 10;
+            if (activeBlockers.includes('adGuard')) score += 8;
+            if (activeBlockers.includes('duckDuckGoPrivacy')) score += 8;
+            if (activeBlockers.includes('unknown')) score += 5;
         }
 
-        // Bonus si Do Not Track est activé
-        if (securitySettings.doNotTrack) {
-            score += 5;
-        }
+        if (securitySettings.doNotTrack) score += 5;
+        if (!securitySettings.cookiesEnabled) score += 10;
+        if (!securitySettings.webRTCEnabled) score += 5;
+        if (securitySettings.isPrivateMode) score += 15;
+        if (securitySettings.fingerprintingProtection) score += 10;
+        if (!securitySettings.isHTTPS) score -= 20;
 
-        // Bonus si les cookies sont désactivés
-        if (!securitySettings.cookiesEnabled) {
-            score += 10;
-        }
-
-        // Bonus si WebRTC est désactivé
-        if (!securitySettings.webRTCEnabled) {
-            score += 5;
-        }
-
-        // Bonus si le mode privé est détecté
-        if (securitySettings.isPrivateMode) {
-            score += 15;
-        }
-
-        // Bonus si la protection contre le fingerprinting est détectée
-        if (securitySettings.fingerprintingProtection) {
-            score += 10;
-        }
-
-        // Malus si HTTPS n'est pas utilisé
-        if (!securitySettings.isHTTPS) {
-            score -= 20;
-        }
-
-        // Limiter le score entre 0 et 100
         return Math.min(100, Math.max(0, score));
     };
 
@@ -401,11 +346,10 @@
     const generateReport = async () => {
         const browser = detectBrowser();
         const os = detectOS();
-        const adBlockers = detectAdBlockers();
+        const adBlockers = await detectAdBlockers();
         const securitySettings = detectSecuritySettings();
         const otherIndicators = detectOtherIndicators();
 
-        // Attendre les détections asynchrones
         const isPrivateMode = await securitySettings.isPrivateMode;
         securitySettings.isPrivateMode = isPrivateMode;
 
@@ -419,12 +363,11 @@
             securityScore: calculateSecurityScore(adBlockers, securitySettings)
         };
 
-        console.log('[GoodWidget] Rapport de sécurité:', report);
         window.goodWidgetReport = report;
         return report;
     };
 
-    // --- 6. Création du widget visuel ---
+    // --- 6. Création du widget visuel (avec emojis) ---
     const createWidget = (report) => {
         const widget = document.createElement('div');
         widget.className = 'goodwidget-container';
@@ -447,6 +390,28 @@
         };
         Object.assign(widget.style, positions[WIDGET_CONFIG.position]);
 
+        // Fonction pour ajouter des emojis en fonction du score
+        const getEmojiForValue = (value, isGood) => {
+            if (isGood) {
+                return value ? '✅' : '❌';
+            } else {
+                return value ? '✅' : '⚠️';
+            }
+        };
+
+        // Fonction pour déterminer si une propriété est "bonne" ou "mauvaise"
+        const isPropertyGood = (property, value) => {
+            const goodProperties = {
+                isHTTPS: true,
+                cookiesEnabled: false, // ❌ Moins bon pour la vie privée
+                doNotTrack: true,
+                webRTCEnabled: false, // ❌ Peut fuiter l'IP
+                fingerprintingProtection: true,
+                isPrivateMode: true
+            };
+            return goodProperties[property] === value;
+        };
+
         // Contenu du widget
         widget.innerHTML = `
             <div class="goodwidget-header">
@@ -467,16 +432,32 @@
                 <div class="goodwidget-detail-row">
                     <span class="goodwidget-detail-label">Bloqueur de pubs</span>
                     <span class="goodwidget-detail-value">
-                        ${Object.entries(report.adBlockers).filter(([_, detected]) => detected).map(([name]) => name).join(', ') || 'Aucun'}
+                        ${Object.entries(report.adBlockers).filter(([_, detected]) => detected).map(([name]) => name).join(', ') || '❌ Aucun'}
                     </span>
                 </div>
                 <div class="goodwidget-detail-row">
                     <span class="goodwidget-detail-label">HTTPS</span>
-                    <span class="goodwidget-detail-value">${report.securitySettings.isHTTPS ? '✅' : '❌'}</span>
+                    <span class="goodwidget-detail-value">${getEmojiForValue(report.securitySettings.isHTTPS, true)}</span>
                 </div>
                 <div class="goodwidget-detail-row">
                     <span class="goodwidget-detail-label">Mode privé</span>
-                    <span class="goodwidget-detail-value">${report.securitySettings.isPrivateMode ? '✅' : '❌'}</span>
+                    <span class="goodwidget-detail-value">${getEmojiForValue(report.securitySettings.isPrivateMode, true)}</span>
+                </div>
+                <div class="goodwidget-detail-row">
+                    <span class="goodwidget-detail-label">Do Not Track</span>
+                    <span class="goodwidget-detail-value">${getEmojiForValue(report.securitySettings.doNotTrack, true)}</span>
+                </div>
+                <div class="goodwidget-detail-row">
+                    <span class="goodwidget-detail-label">Cookies</span>
+                    <span class="goodwidget-detail-value">${getEmojiForValue(!report.securitySettings.cookiesEnabled, false)}</span>
+                </div>
+                <div class="goodwidget-detail-row">
+                    <span class="goodwidget-detail-label">WebRTC</span>
+                    <span class="goodwidget-detail-value">${getEmojiForValue(!report.securitySettings.webRTCEnabled, false)}</span>
+                </div>
+                <div class="goodwidget-detail-row">
+                    <span class="goodwidget-detail-label">Fingerprinting</span>
+                    <span class="goodwidget-detail-value">${getEmojiForValue(report.securitySettings.fingerprintingProtection, true)}</span>
                 </div>
             </div>
             ` : ''}
