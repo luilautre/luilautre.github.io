@@ -20,14 +20,19 @@
                 z-index: 9999;
                 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
                 font-size: 14px;
-                line-height: 1.4;
+                line-height: 1.5; /* ✅ Augmenté pour un meilleur centrage */
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
                 border-radius: 8px;
-                padding: 12px 16px;
+                padding: 10px 14px; /* ✅ Réduit légèrement pour éviter l'effet "trop large" */
                 color: white;
                 cursor: default;
                 transition: all 0.3s ease;
-                max-width: 300px;
+                max-width: 220px; /* ✅ Largeur maximale fixée */
+                min-height: 50px; /* ✅ Hauteur minimale pour éviter le compactage */
+                box-sizing: border-box; /* ✅ Inclut padding et border dans la largeur */
+                display: flex;
+                flex-direction: column;
+                justify-content: center; /* ✅ Centrage vertical */
                 ${WIDGET_CONFIG.animation ? 'opacity: 0; transform: translateY(20px);' : ''}
             }
 
@@ -57,26 +62,32 @@
             .goodwidget-header {
                 display: flex;
                 justify-content: space-between;
-                align-items: center;
-                margin-bottom: 8px;
+                align-items: center; /* ✅ Centrage vertical pour l'en-tête */
+                width: 100%;
+                margin: 0; /* ✅ Supprime les marges inutiles */
             }
 
             .goodwidget-title {
                 font-weight: 600;
                 font-size: 15px;
+                margin: 0;
+                line-height: 1.5; /* ✅ Aligné avec le conteneur */
             }
 
             .goodwidget-score {
                 font-weight: 700;
                 font-size: 18px;
+                margin: 0;
+                line-height: 1.5; /* ✅ Aligné avec le conteneur */
             }
 
             .goodwidget-details {
                 display: none;
-                margin-top: 10px;
-                padding-top: 10px;
+                margin-top: 8px;
+                padding-top: 8px;
                 border-top: 1px solid rgba(255, 255, 255, 0.2);
                 font-size: 13px;
+                width: 100%;
             }
 
             .goodwidget-container:hover .goodwidget-details {
@@ -89,8 +100,9 @@
                 color: white;
                 font-size: 18px;
                 cursor: pointer;
-                padding: 0 0 0 8px;
+                padding: 0;
                 line-height: 1;
+                margin-left: 8px; /* ✅ Espacement entre le score et la croix */
             }
 
             .goodwidget-close:hover {
@@ -101,6 +113,7 @@
                 display: flex;
                 justify-content: space-between;
                 margin: 4px 0;
+                width: 100%;
             }
 
             .goodwidget-detail-label {
